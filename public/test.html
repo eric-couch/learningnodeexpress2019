@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function updateValues(data) {
+            const { title } = data; // destructuring
+            document.querySelector("#main").innerHTML = title;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#getdata").addEventListener("click", function () {
+                getData("/getData", "").then(data => updateValues(data));
+            })
+        });
+        function getData(url, data) {
+            // Default options are marked with *
+            return fetch(url, {
+                //body: JSON.stringify(data), // must match 'Content-Type' header
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, same-origin, *omit
+                headers: {
+                    "user-agent": "Mozilla/4.0 MDN Example",
+                    "content-type": "application/json"
+                },
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "same-origin", // no-cors, cors, *same-origin
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer" // *client, no-referrer
+            }).then(response => response.json()); // parses response to JSON
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="main"></div>
+    <button id="getdata">click me</button>
+</body>
+
+</html>

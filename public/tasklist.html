@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>this is a title</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("newtask").addEventListener("click", function () {
+
+                //document.getElementById("tasklist").style.backgroundColor = "red";
+            })
+        })
+        function getData(url, data) {
+            // Default options are marked with *
+            return fetch(url, {
+                //body: JSON.stringify(data), // must match 'Content-Type' header
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, same-origin, *omit
+                headers: {
+                    "user-agent": "Mozilla/4.0 MDN Example",
+                    "content-type": "application/json"
+                },
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "same-origin", // no-cors, cors, *same-origin
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer" // *client, no-referrer
+            }).then(response => response.json()); // parses response to JSON
+        }
+    </script>
+</head>
+
+<body>
+    <div id="tasklist" style="color: red; 
+                font-size: 24pt;
+                font-weight: bold;
+                border: 5px dashed green;
+                height: 150px;
+                width: 300px">
+        Task List
+        <button id="newtask" style="position: relative; 
+        top: 60px;
+        left: 0px;float: left;">new task list</button>
+    </div>
+</body>
+
+</html>
