@@ -3,10 +3,12 @@
 <head>
     <title>this is a title</title>
     <script>
+        function updateValues(data) {
+            document.getElementById("tasklist").style.backgroundColor = "rgb(" + data.red + "," + data.green + "," + data.blue + ")";
+        }
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("newtask").addEventListener("click", function () {
-
-                //document.getElementById("tasklist").style.backgroundColor = "red";
+                let data = getData('/colors').then(data => updateValues(data));
             })
         })
         function getData(url, data) {

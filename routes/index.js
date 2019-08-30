@@ -10,4 +10,11 @@ router.get('/getData', function (req, res, next) {
   res.json({ title: 'ThisIsStillJSON' });
 });
 
+router.get('/colors', function (req, res, next) {
+  let red = Math.floor(Math.random() * 255);
+  let green = Math.floor(Math.random() * 255);
+  let blue = Math.floor(Math.random() * 255);
+  res.json({ red: red, green: green, blue: blue });
+})
+
 module.exports = router;
