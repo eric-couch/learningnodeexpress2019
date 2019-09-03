@@ -6,10 +6,6 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'IChangedThis' });
 });
 
-router.get('/getData', function (req, res, next) {
-  res.json({ title: 'ThisIsStillJSON' });
-});
-
 router.get('/colors', function (req, res, next) {
   let red = Math.floor(Math.random() * 255);
   let green = Math.floor(Math.random() * 255);
