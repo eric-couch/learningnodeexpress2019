@@ -89,7 +89,32 @@ router.get('/getStudentByAge', function (req, res, next) {
             matchingAgeStudents.push(student);
         }
     });
-    res.send(matchingAgeStudents);
+    let response = "";
+    matchingAgeStudents.forEach(function (student) {
+        response += `first name: ${student.firstName}<br>
+        last name: ${student.lastName}<br>
+        age: ${student.age}<br>
+        email: ${student.email}<hr>`
+    })
+    res.send(response);
 });
+
+
+router.get('/addStudent', function (req, res, next) {
+    //const { firstName, lastName, age, email } = req.query;
+    student = {
+        firstName: req.query.firstName,
+        lastName: req.query.lastName,
+        age: req.query.age,
+        email: req.query.email
+    }
+    students.push(student);
+    res.send('student added');
+})
+
+router.get('/deleteStudent', function (req, res, next) {
+    students = students.filter(student => student.firstName != req.query.name);
+    res.send(`student ${req.query.name} removed`);
+})
 
 module.exports = router;
