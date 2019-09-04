@@ -90,6 +90,9 @@ router.get('/getStudentByAge', function (req, res, next) {
         }
     });
     let response = "";
+    matchingAgeStudents.sort(function (a, b) {
+        return a.age - b.age;
+    });
     matchingAgeStudents.forEach(function (student) {
         response += `first name: ${student.firstName}<br>
         last name: ${student.lastName}<br>
@@ -116,5 +119,37 @@ router.get('/deleteStudent', function (req, res, next) {
     students = students.filter(student => student.firstName != req.query.name);
     res.send(`student ${req.query.name} removed`);
 })
+
+router.post("/returnStudent", function (req, res, next) {
+    let matchingStudents = [];
+    if (req.body.firstName) {
+        matchingStudents = students.filter(student =>
+            student.firstName
+                .toLowerCase()
+                .startsWith(req.body.firstName.toLowerCase())
+        );
+    }
+    if (req.body.lastName) {
+        matchingStudents = students.filter(student =>
+            student.lastName.toLowerCase().startsWith(req.body.lastName.toLowerCase())
+        );
+    }
+    if (req.body.age) {
+        matchingStudents = students.filter(student => student.age == req.body.age);
+    }
+    if (req.body.email) {
+        matchingStudents = students.filter(student =>
+            student.email.toLowerCase().startsWith(req.body.email.toLowerCase())
+        );
+    }
+    let response = "";
+    matchingStudents.forEach(function (student) {
+        response += `name: ${student.firstName} ${student.lastName}<br>age: ${
+            student.age
+            }<br>email: ${student.email}<hr>`;
+    });
+
+    res.send(response);
+});
 
 module.exports = router;
