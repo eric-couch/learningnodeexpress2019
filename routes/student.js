@@ -63,22 +63,22 @@ router.get('/getStudent', function (req, res, next) {
     res.send(studentsFound);
 })
 
-// router.get('/getStudentByAge', function (req, res, next) {
-//     if (req.query.minAge && req.query.maxAge) {
-//         let matchingStudents = students.filter(
-//             student => student.age >= req.query.minAge && student.age <= req.query.maxAge
-//         );
-//         let response = "";
-//         matchingStudents.forEach(function (student) {
-//             response += `name: ${student.firstName} ${student.lastName}<br>age: ${
-//                 student.age
-//                 }<br>email: ${student.email}<hr>`;
-//         });
-//         res.send(response);
-//     } else {
-//         res.send("bad input");
-//     }
-// });
+router.get('/getStudentByAge', function (req, res, next) {
+    if (req.query.minAge && req.query.maxAge) {
+        let matchingStudents = students.filter(
+            student => student.age >= req.query.minAge && student.age <= req.query.maxAge
+        );
+        let response = "";
+        matchingStudents.forEach(function (student) {
+            response += `name: ${student.firstName} ${student.lastName}<br>age: ${
+                student.age
+                }<br>email: ${student.email}<hr>`;
+        });
+        res.send(response);
+    } else {
+        res.send("bad input");
+    }
+});
 
 router.get('/getStudentByAge', function (req, res, next) {
     let minAge = req.query.minAge;
