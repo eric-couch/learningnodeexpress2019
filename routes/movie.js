@@ -9,8 +9,14 @@ router.get('/', function (req, res, next) {
     res.render('index', { title: 'Happy Birthday' });
 });
 
-router.get('/getMovie', function (req, res, next) {
-    let name = req.query.name;
+router.all('/getMovie', function (req, res, next) {
+    let name = "";
+    if (req.method == 'POST') {
+        name = req.body.name;
+    } else {
+        name = req.query.name;
+    }
+
 
     let fetchURL = 'http://www.omdbapi.com/?apikey=86c39163&t=' + name;
     console.log(fetchURL);
